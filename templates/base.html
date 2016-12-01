@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}style.css"/>
     <title>{% block title %}My amazing site{% endblock %}</title>
 </head>
 
 <body>
-    <div id="sidebar">
-        {% block sidebar %}
+<div id="sidebar">
+    {% block sidebar %}
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/roomate_app/">Home</a></li>
         </ul>
-        {% endblock %}
-    </div>
-
-    <div id="content">
+    {% endblock %}
+</div>
+<div id="content">
     <div id="content">
         {% block content %}{% endblock %}
     </div>

@@ -4,6 +4,7 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 # class Roomate(models.Model):
@@ -23,6 +24,7 @@ class Bill(models.Model):
     remaining_cost = models.DecimalField(max_digits=65, decimal_places=2)
     creation_date = models.DateField(auto_created=True)
 
+
 class Grocery(models.Model):
     gname = models.CharField(max_length=128)
     store = models.CharField(max_length=128)
@@ -32,15 +34,16 @@ class Grocery(models.Model):
     remaining_cost = models.DecimalField(max_digits=65, decimal_places=2)
     creation_date = models.DateField(auto_created=True)
 
+
 class Chore(models.Model):
     name = models.CharField(max_length=128)
-    assignee =  models.ForeignKey(User, on_delete=models.CASCADE)
+    assignee = models.ForeignKey(User, on_delete=models.CASCADE)
     due_date = models.DateField()
     if_complete = models.BooleanField(default=False)
     creation_date = models.DateField(auto_created=True)
 
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         profile, created = Roomate.objects.get_or_create(user=instance)
-#
-# post_save.connect(create_user_profile, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         profile, created = Roomate.objects.get_or_create(user=instance)
+    #
+    # post_save.connect(create_user_profile, sender=User)
