@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import CreateUserForm
+from .models import Bill, Grocery, Chore
 
 
 def index(request):
