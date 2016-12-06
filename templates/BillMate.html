@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ STATIC_URL }}style.css"/>
+    <title>BillMate</title>
+	<style>
+		body{
+			background-color:black;
+		}
+		header, footer {
+			padding: .5em;
+			color: white;
+			background-color: #737373;
+			clear: left;
+			text-align: center;
+		}
+		
+		nav {
+			float: left;
+			max-width: 160px;
+			margin: 0;
+			padding: 2em;
+			background-color:white;
+		}
+
+		nav ul {
+			list-style-type: square;
+			padding: 0em;
+		}
+		   
+		nav ul a {
+			text-decoration: none;
+		}
+		
+		article {
+			margin-left: 170px;
+			padding: 1em;
+			overflow: hidden;
+		}
+		
+		div.container {
+			width: 100%;
+			border: 1px solid gray;
+			background-color: #0099ff;
+		}
+	</style>
+</head>
+<div class="container">
+<header> 
+<h1 style="font-size:250%;"><img src="Logomakr_906yc9.png" alt="BillMate" style="width:160px;height:100px;">Roommate Bill Organizer</h1>
+
+</header> 
+
+
+<body>
+
+<nav>
+        <ul>
+            <li><a href="/roomate_app/">Home</a></li>
+        </ul>
+		<hr>
+		<ul>
+            <li><a href="/roomate_app/">Manage Bills</a></li>
+        </ul>
+		<ul>
+            <li><a href="/roomate_app/">Manage Chores</a></li>
+        </ul>
+		<ul>
+            <li><a href="/roomate_app/">Manage Groceries</a></li>
+        </ul>
+		<ul>
+            <li><a href="/roomate_app/">Payment History</a></li>
+        </ul>
+		<ul>
+            <li><a href="/roomate_app/">Duty Report</a></li>
+        </ul>
+		<hr>
+        <ul>
+            <li><a href="/roomate_app/">Login</a></li>
+        </ul>
+        <ul>
+            <li><a href="/roomate_app/">Logout</a></li>
+        </ul>
+</nav>
+<article>
+	<p>
+	This is where we will put the information
+	</p>
+</article>
+<footer>Copyright © BillMate 2016</footer>
+
+</div>
+</body>
+</html>
