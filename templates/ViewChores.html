@@ -1,0 +1,16 @@
+{% extends 'BillMate.html' %}
+
+{% block title %}Chores{% endblock %}
+
+{% block content %}
+    <h3>Add Chore:</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <h3>Chore List: </h3>
+    {% for chore in chore_list %}
+        <li><b>{{ chore.name }}:</b> {{ chore.assignee }}</li>
+    {% endfor %}
+{% endblock %}
