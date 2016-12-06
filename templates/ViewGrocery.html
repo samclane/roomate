@@ -1,0 +1,16 @@
+{% extends 'BillMate.html' %}
+
+{% block title %}Grocery{% endblock %}
+
+{% block content %}
+    <h3>Add Grocery Item:</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <h3>Grocery List: </h3>
+    {% for grocery in grocery_list %}
+        <li><b>{{ grocery.gname }}:</b> {{ grocery.store }}</li>
+    {% endfor %}
+{% endblock %}
