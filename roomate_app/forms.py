@@ -12,3 +12,8 @@ class CreateBillForm(ModelForm):
     class Meta:
         model = Bill
         fields = ['bname', 'company', 'if_purchased', 'due_date', 'total_cost']
+        		
+class CreateChoreForm(ModelForm):
+    class Meta:
+        model = Chore
+        fields = ['name', 'assignee', 'if_complete', 'due_date', 'total_cost']
