@@ -17,3 +17,8 @@ class CreateChoreForm(ModelForm):
     class Meta:
         model = Chore
         fields = ['name', 'assignee', 'if_complete', 'due_date', 'total_cost']
+		
+class CreateGroceryForm(ModelForm):
+    class Meta:
+        model = Grocery
+        fields = ['gname', 'store', 'if_purchased', 'total_cost']
