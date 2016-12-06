@@ -74,9 +74,25 @@ def view_chores(request):
                 c.save()
                 return HttpResponseRedirect('view_chores')
         else:
-            form = CreateBillForm()
-        chore_list = Chore.objects.exclude(remaining_cost=0).order_by('-due_date')[:]
+            form = CreateChoreForm()
+        chore_list = Chore.objects.exclude(if_complete=True).order_by('-due_date')[:]
         return render(request, 'ViewChores.html', {'form': form, 'chore_list': chore_list})
+    else:
+        return HttpResponse("Please log in.")
+
+		
+def view_grocery(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CreateChoreForm(request.POST)
+            if form.is_valid():
+                g = grocery.objects.create(**form.cleaned_data)
+                g.save()
+                return HttpResponseRedirect('view_grocery')
+        else:
+            form = CreateGroceryForm()
+        grocery_list = Grocery.objects.exclude(remaining_cost=0).exclude(if_purchased=True).order_by('-store')[:]
+        return render(request, 'ViewGrocery.html', {'form': form, 'grocery_list': grocery_list})
     else:
         return HttpResponse("Please log in.")
 
