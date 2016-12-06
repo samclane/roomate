@@ -48,14 +48,14 @@ def create_user(request):
 
     return render(request, 'registration/create_user.html', {'form': form})
 
+
 def view_bills(request):
     if request.user.is_authenticated:
-        bill_list = Bill.objects.exclude(if_paid__gte=True).order_by('-due_date')[:]
+        bill_list = Bill.objects.exclude(remaining_cost=0).order_by('-due_date')[:]
         context = {'bill_list': bill_list}
-        return HttpResponse(context)
+        return render(request, 'BillMate.html', context)
     else:
         return HttpResponse("Please log in.")
-
 
 # @login_required(login_url='login/')
 # def main(request):

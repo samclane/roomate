@@ -1,9 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'BillMate.html' %}
 
 {% block title %}Create Account{% endblock %}
 
 {% block content %}
-  <h2>Create User</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
