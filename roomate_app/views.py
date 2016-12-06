@@ -65,6 +65,21 @@ def view_bills(request):
     else:
         return HttpResponse("Please log in.")
 
+def view_chores(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CreateChoreForm(request.POST)
+            if form.is_valid():
+                c = Chore.objects.create(**form.cleaned_data)
+                c.save()
+                return HttpResponseRedirect('view_chores')
+        else:
+            form = CreateBillForm()
+        chore_list = Chore.objects.exclude(remaining_cost=0).order_by('-due_date')[:]
+        return render(request, 'ViewChores.html', {'form': form, 'chore_list': chore_list})
+    else:
+        return HttpResponse("Please log in.")
+
 # @login_required(login_url='login/')
 # def main(request):
 #     pass
