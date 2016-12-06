@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 import uuid
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -21,8 +22,8 @@ class Bill(models.Model):
     if_purchased = models.BooleanField(default=False)
     due_date = models.DateField()
     total_cost = models.DecimalField(max_digits=65, decimal_places=2)
-    remaining_cost = models.DecimalField(max_digits=65, decimal_places=2)
-    creation_date = models.DateField(auto_created=True)
+    remaining_cost = models.DecimalField(max_digits=65, decimal_places=2, default=0.0)
+    creation_date = models.DateField(auto_created=True, editable=False, auto_now=True)
 
 
 class Grocery(models.Model):
@@ -31,8 +32,8 @@ class Grocery(models.Model):
     if_purchased = models.BooleanField(default=False)
     purchaser = models.ForeignKey(User, on_delete=models.CASCADE)
     total_cost = models.DecimalField(max_digits=65, decimal_places=2)
-    remaining_cost = models.DecimalField(max_digits=65, decimal_places=2)
-    creation_date = models.DateField(auto_created=True)
+    remaining_cost = models.DecimalField(max_digits=65, decimal_places=2, default=0.0)
+    creation_date = models.DateField(auto_created=True, editable=False,auto_now=True)
 
 
 class Chore(models.Model):
@@ -40,7 +41,7 @@ class Chore(models.Model):
     assignee = models.ForeignKey(User, on_delete=models.CASCADE)
     due_date = models.DateField()
     if_complete = models.BooleanField(default=False)
-    creation_date = models.DateField(auto_created=True)
+    creation_date = models.DateField(auto_created=True, editable=False, auto_now=True)
 
     # def create_user_profile(sender, instance, created, **kwargs):
     #     if created:

@@ -1,0 +1,16 @@
+{% extends 'BillMate.html' %}
+
+{% block title %}Bills{% endblock %}
+
+{% block content %}
+    <h3>Add Bill:</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <h3>Bill List: </h3>
+    {% for bill in bill_list %}
+        <li><b>{{ bill.bname }}:</b> {{ bill.remaining_cost }}</li>
+    {% endfor %}
+{% endblock %}

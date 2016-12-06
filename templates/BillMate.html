@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}style.css"/>
+    <link rel="stylesheet" href="{% static "roomate_app/style.css" %}"/>
     <title>BillMate</title>
     <style>
         body {
@@ -63,7 +63,7 @@
         </ul>
         <hr>
         <ul>
-            <li><a href="/roomate_app/">Manage Bills</a></li>
+            <li><a href="/roomate_app/view_bills">Manage Bills</a></li>
         </ul>
         <ul>
             <li><a href="/roomate_app/">Manage Chores</a></li>
@@ -82,7 +82,7 @@
             <li><a href="/roomate_app/login">Login</a></li>
         </ul>
         <ul>
-            <li><a href="/roomate_app/">Logout</a></li>
+            <li><a href="/roomate_app/logout">Logout</a></li>
         </ul>
     </nav>
     <article>

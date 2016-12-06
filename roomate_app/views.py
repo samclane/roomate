@@ -6,13 +6,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import CreateUserForm
+from .forms import CreateUserForm, CreateBillForm
 from .models import Bill, Grocery, Chore
 
 
 def index(request):
     if request.user.is_authenticated:
-        return HttpResponse("Hello, world. You're at the roomate_app index.")
+        return render(request, 'index.html')
     else:
         return HttpResponse("Please log in.")
 
@@ -51,9 +51,17 @@ def create_user(request):
 
 def view_bills(request):
     if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CreateBillForm(request.POST)
+            if form.is_valid():
+                b = Bill.objects.create(**form.cleaned_data)
+                b.remaining_cost = b.total_cost
+                b.save()
+                return HttpResponseRedirect('view_bills')
+        else:
+            form = CreateBillForm()
         bill_list = Bill.objects.exclude(remaining_cost=0).order_by('-due_date')[:]
-        context = {'bill_list': bill_list}
-        return render(request, 'BillMate.html', context)
+        return render(request, 'ViewBills.html', {'form': form, 'bill_list': bill_list})
     else:
         return HttpResponse("Please log in.")
 
