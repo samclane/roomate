@@ -1,0 +1,21 @@
+{% extends 'BillMate.html' %}
+
+{% block title %}Duty Report{% endblock %}
+
+{% block content %}
+    <h3>Paid Bills: </h3>
+    {% cost=0 %}
+    {% for bill in bill_list%}
+        <li><b>{{ bill.bname }}:</b> {{ bill.total_cost }}</li>
+        {% cost= cost + bill.total_cost %}
+    {% endfor %}
+    <h3>Total Bill Cost: {{cost}} </h3>
+    <hr>
+    {% cost=0 %}
+    <h3>Groceries Bought: </h3>
+    {% for grocery in grocery_list %}
+        <li><b>{{ grocery.gname }}:</b> {{ grocery.total_cost }}</li>  
+        {% cost= cost + grocery.total_cost %}
+    {% endfor %}
+    <h3>Total Grocery Cost: {{cost}} </h3>
+{% endblock %}
