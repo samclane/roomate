@@ -84,7 +84,7 @@ def view_chores(request):
 def view_grocery(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = CreateChoreForm(request.POST)
+            form = CreateGroceryForm(request.POST)
             if form.is_valid():
                 g = grocery.objects.create(**form.cleaned_data)
                 g.save()
@@ -96,6 +96,23 @@ def view_grocery(request):
     else:
         return HttpResponse("Please log in.")
 
+def view_payment_history(request):
+    if request.user.is_authenticated:
+        grocery_list = Grocery.objects.filter(if_purchased=True).order_by('-store')[:]
+	bill_list = Bill.objects.filter(if_purchased=True).order_by('-due_date')[:]
+        return render(request, 'ViewPaymentHistory.html', { 'grocery_list': grocery_list, 'bill_list': bill_list})
+    else:
+        return HttpResponse("Please log in.")
+
+def view_duty_report(request):
+    if request.user.is_authenticated:
+        grocery_list = Grocery.objects.filter(if_purchased=False).order_by('-store')[:]
+	chore_list = Chore.objects.filter(if_complete=False).order_by('-due_date')[:]
+	bill_list = Bill.objects.filter(if_purchased=False).order_by('-due_date')[:]
+        return render(request, 'ViewPaymentHistory.html', { 'grocery_list': grocery_list,'chore_list': chore_list, 'bill_list': bill_list})
+    else:
+        return HttpResponse("Please log in.")
+		
 # @login_required(login_url='login/')
 # def main(request):
 #     pass
