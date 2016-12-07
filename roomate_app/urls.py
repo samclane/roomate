@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^view_bills/', views.view_bills, name='view_bills'),
     url(r'^view_grocery/', views.view_grocery, name='view_grocery'),
     url(r'^view_chores/', views.view_chores, name='view_chores'),
+    url(r'^view_duty_report/', views.view_duty_report, name='view_duty_report'),
+    url(r'^view_expense_report/', views.view_expense_report, name='view_expense_report'),
 ]
