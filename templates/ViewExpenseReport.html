@@ -4,20 +4,16 @@
 
 {% block content %}
     <h3>Bills to be Paid: </h3>
-    {% cost=0 %}
-    {% for bill in bill_list%}
+    {% for bill in bill_list %}
         <li><b>{{ bill.bname }}:</b> {{ bill.total_cost }}</li>
-        {% cost= cost + bill.total_cost %}
     {% endfor %}
-    <h3>Total Bill Cost: {{cost}} </h3>
+    <h3>Total Bill Cost: {{bill_sum}} </h3>
     <hr>
-    {% cost=0 %}
     <h3>Groceries to be Bought: </h3>
     {% for grocery in grocery_list %}
-        <li><b>{{ grocery.gname }}:</b> {{ grocery.total_cost }}</li>  
-        {% cost= cost + grocery.total_cost %}
+        <li><b>{{ grocery.gname }}:</b> {{ grocery.total_cost }}</li>
     {% endfor %}
-    <h3>Total Grocery Cost: {{cost}} </h3>
+    <h3>Total Grocery Cost: {{grocery_sum}} </h3>
     <hr>
     <h3>Chores to be Done: </h3>
     {% for chore in chore_list %}

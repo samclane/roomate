@@ -19,7 +19,7 @@ from django.contrib.auth.models import User
 class Bill(models.Model):
     bname = models.CharField(max_length=128)
     company = models.CharField(max_length=512)
-    if_purchased = models.BooleanField(default=False)
+    if_paid = models.BooleanField(default=False)
     due_date = models.DateField()
     total_cost = models.DecimalField(max_digits=65, decimal_places=2)
     remaining_cost = models.DecimalField(max_digits=65, decimal_places=2, default=0.0)

@@ -11,14 +11,16 @@ class CreateUserForm(forms.Form):
 class CreateBillForm(ModelForm):
     class Meta:
         model = Bill
-        fields = ['bname', 'company', 'if_purchased', 'due_date', 'total_cost']
-        		
+        fields = ['bname', 'company', "if_paid", 'due_date', 'total_cost']
+
+
 class CreateChoreForm(ModelForm):
     class Meta:
         model = Chore
-        fields = ['name', 'assignee', 'if_complete', 'due_date', 'total_cost']
-		
+        fields = ['name', 'assignee', 'if_complete', 'due_date']
+
+
 class CreateGroceryForm(ModelForm):
     class Meta:
         model = Grocery
-        fields = ['gname', 'store', 'if_purchased', 'total_cost']
+        fields = ['gname', 'store', "if_purchased", 'total_cost', 'purchaser']

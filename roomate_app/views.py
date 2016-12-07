@@ -6,8 +6,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import CreateUserForm, CreateBillForm
+from .forms import CreateUserForm, CreateBillForm, CreateGroceryForm, CreateChoreForm
 from .models import Bill, Grocery, Chore
+from django.db.models import Sum
 
 
 def index(request):
@@ -65,6 +66,7 @@ def view_bills(request):
     else:
         return HttpResponse("Please log in.")
 
+
 def view_chores(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -80,13 +82,14 @@ def view_chores(request):
     else:
         return HttpResponse("Please log in.")
 
-		
+
 def view_grocery(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = CreateGroceryForm(request.POST)
             if form.is_valid():
-                g = grocery.objects.create(**form.cleaned_data)
+                g = Grocery.objects.create(**form.cleaned_data)
+                g.remaining_cost = g.total_cost
                 g.save()
                 return HttpResponseRedirect('view_grocery')
         else:
@@ -96,23 +99,29 @@ def view_grocery(request):
     else:
         return HttpResponse("Please log in.")
 
-def view_payment_history(request):
+
+def view_expense_report(request):
     if request.user.is_authenticated:
         grocery_list = Grocery.objects.filter(if_purchased=True).order_by('-store')[:]
-	bill_list = Bill.objects.filter(if_purchased=True).order_by('-due_date')[:]
-        return render(request, 'ViewPaymentHistory.html', { 'grocery_list': grocery_list, 'bill_list': bill_list})
+        grocery_sum = grocery_list.aggregate(Sum('remaining_cost')).values()[0]
+        bill_list = Bill.objects.filter(if_paid=True).order_by('-due_date')[:]
+        bill_sum = bill_list.aggregate(Sum('remaining_cost')).values()[0]
+        return render(request, 'ViewExpenseReport.html',
+                      {'grocery_list': grocery_list, 'grocery_sum': grocery_sum, 'bill_list': bill_list,
+                       'bill_sum': bill_sum})
     else:
         return HttpResponse("Please log in.")
+
 
 def view_duty_report(request):
     if request.user.is_authenticated:
         grocery_list = Grocery.objects.filter(if_purchased=False).order_by('-store')[:]
-	chore_list = Chore.objects.filter(if_complete=False).order_by('-due_date')[:]
-	bill_list = Bill.objects.filter(if_purchased=False).order_by('-due_date')[:]
-        return render(request, 'ViewPaymentHistory.html', { 'grocery_list': grocery_list,'chore_list': chore_list, 'bill_list': bill_list})
+        grocery_sum = grocery_list.aggregate(Sum('remaining_cost')).values()[0]
+        chore_list = Chore.objects.filter(if_complete=False).order_by('-due_date')[:]
+        bill_list = Bill.objects.filter(if_paid=False).order_by('-due_date')[:]
+        bill_sum = bill_list.aggregate(Sum('remaining_cost')).values()[0]
+        return render(request, 'ViewDutyReport.html',
+                      {'grocery_list': grocery_list, 'grocery_sum': grocery_sum, 'bill_list': bill_list,
+                       'bill_sum': bill_sum})
     else:
         return HttpResponse("Please log in.")
-		
-# @login_required(login_url='login/')
-# def main(request):
-#     pass
