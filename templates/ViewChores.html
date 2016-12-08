@@ -11,6 +11,7 @@
     </form>
     <h3>Chore List: </h3>
     {% for chore in chore_list %}
-        <li><b>{{ chore.name }}:</b>{{ chore.assignee }} must complete by {{ chore.due_date }} <br><pre>    Created {{chore.creation_date}}</pre></li>
+        <li><b>{{ chore.name }}:</b>{{ chore.assignee }} must complete task by {{ chore.due_date }} 
+            <br><pre>    Created {{chore.creation_date}}</pre></li>
     {% endfor %}
 {% endblock %}
