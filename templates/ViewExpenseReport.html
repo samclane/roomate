@@ -5,7 +5,7 @@
 {% block content %}
     <h3>Paid Bills: </h3>
     {% for bill in bill_list%}
-        <li><b>{{ bill.bname }}:</b> {{ bill.total_cost }}</li>
+        <li><b>{{ bill.bname }}:</b> ${{ bill.total_cost }} paid to {{bill.company}} on {{bill.due_date}}</li>
     {% endfor %}
     <h3>Total Bill Cost: {{bill_sum}} </h3>
     <hr>
