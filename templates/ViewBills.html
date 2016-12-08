@@ -11,6 +11,6 @@
     </form>
     <h3>Bill List: </h3>
     {% for bill in bill_list %}
-        <li><b>{{ bill.bname }}:</b> {{ bill.remaining_cost }}</li>
+        <li><b>{{ bill.bname }}:</b> ${{ bill.remaining_cost }} out of {{bill.total_cost}} due to {{bill.company}} by {{bill.due_date}}</li>
     {% endfor %}
 {% endblock %}
