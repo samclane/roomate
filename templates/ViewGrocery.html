@@ -11,7 +11,7 @@
     </form>
     <h3>Grocery List: </h3>
     {% for grocery in grocery_list %}
-        <li><b>{{ grocery.gname }}:</b>${{grocery.remaining_cost}} of ${{grocery.total_cost}} remains. 
+        <li><b>{{ grocery.gname }}:</b>${{grocery.remaining_cost}} of ${{grocery.total_cost}} remains. <br>
             <pre>   Purchased from:{{ grocery.store }} By {{grocery.purchaser}} on {{grocery.creation_date}}</pre></li>
     {% endfor %}
 {% endblock %}
